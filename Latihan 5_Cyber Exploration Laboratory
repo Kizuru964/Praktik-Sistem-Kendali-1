@@ -125,14 +125,7 @@ G4 =
  
 Continuous-time zero/pole/gain model.
 Model Properties
->> G5 = conv(G1,G2)
-Error using  ()  (line 150)
-Use two or more subscripts to select or delete all elements, as in the "sys(:,:)" command.
 
-Error in conv (line 16)
-    c = conv2(a(:),b(:));
-              ^^^^
- 
 >> G5 = G1 * G2
 
 G5 =
