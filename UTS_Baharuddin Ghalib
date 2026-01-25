@@ -1,0 +1,278 @@
+>> % Soal nomor 1
+>> A = [0 1; -2 -3];
+>> B = [1 0; 3 -2];
+>> C = [1 -1; -2 2];
+>> A + B
+
+ans =
+
+     1     1
+     1    -5
+
+>> A - B
+
+ans =
+
+    -1     1
+    -5    -1
+
+>> A'
+
+ans =
+
+     0    -2
+     1    -3
+
+>> inv(A)
+
+ans =
+
+   -1.5000   -0.5000
+    1.0000         0
+
+>> diag(A)
+diag(B)
+
+ans =
+
+     0
+    -3
+
+
+ans =
+
+     1
+    -2
+
+>> det(A)
+det(B)
+
+ans =
+
+     2
+
+
+ans =
+
+    -2
+
+>> det(A * B)
+
+ans =
+
+   -4.0000
+
+>> eig(A)
+
+ans =
+
+    -1
+    -2
+
+>> % Soal nomor 2
+>> A = [1 2; 3 4];
+>> B = [5; 6];
+>> x = A\B
+
+x =
+
+   -4.0000
+    4.5000
+
+>> % Soal nomor 3
+>> T = 5;
+>> a = -1/T;
+>> x0 = 1;
+>> % Time Interval
+>> t = 0:1:25;
+>> % Solution differential equation
+>> x = exp(a*t) * x0;
+>> % Untuk Plot
+>> figure
+plot(t, x)
+grid on
+title('Response of First-Order Dynamic System')
+xlabel('Time (t)')
+ylabel('State x(t)')
+
+>> % Soal nomor 4
+>> a. Polynomial tunggal
+>> p = [-2.1  2  0  5  11];
+>> r = roots(p)
+
+r =
+
+   2.0820 + 0.0000i
+  -0.0199 + 1.5193i
+  -0.0199 - 1.5193i
+  -1.0898 + 0.0000i
+
+>> polyval(p, r)
+
+ans =
+
+   1.0e-13 *
+
+   0.2487 + 0.0000i
+  -0.0533 + 0.1479i
+  -0.0533 - 0.1479i
+   0.0533 + 0.0000i
+
+>> p2 = polyval(p, 2)
+
+p2 =
+
+    3.4000
+
+>> % b. Operasi Dua Polinomial
+>> p1 = [-1  1  1];
+>> p2 = [1  0  0  2];
+>> p = conv(p1, p2)
+
+p =
+
+    -1     1     1    -2     2     2
+
+>> r = roots(p)
+
+r =
+
+   1.6180 + 0.0000i
+   0.6300 + 1.0911i
+   0.6300 - 1.0911i
+  -1.2599 + 0.0000i
+  -0.6180 + 0.0000i
+
+>> p_at_2 = polyval(p, 2)
+
+p_at_2 =
+
+   -10
+
+>> px2 = polyval(p, 2)
+
+px2 =
+
+   -10
+
+>> dp2 = polyder(p2)
+
+dp2 =
+
+     3     0     0
+
+>> % Soal nomor 5
+>> num = [1 2 3];
+>> den = [1 4 5 2];
+>> [z, p, k] = residue(num,den)
+
+z =
+
+    3.0000
+   -2.0000
+    2.0000
+
+
+p =
+
+   -2.0000
+   -1.0000
+   -1.0000
+
+
+k =
+
+     []
+
+>> [num, den] = residue(z, p, k)
+figure
+pzmap(tf(num, den))
+grid on
+title('Pole-Zero Map T(s)')
+
+num =
+
+    1.0000    2.0000    3.0000
+
+
+den =
+
+    1.0000    4.0000    5.0000    2.0000
+
+>> % Soal nomor 6
+>> num = [2 3 1];
+>> den = [1 5 6 2];
+>> G = tf(num, den)
+
+G =
+ 
+     2 s^2 + 3 s + 1
+  ---------------------
+  s^3 + 5 s^2 + 6 s + 2
+ 
+Continuous-time transfer function.
+Model Properties
+>> G_zpk = zpk(G)
+
+G_zpk =
+ 
+       2 (s+1) (s+0.5)
+  --------------------------
+  (s+3.414) (s+1) (s+0.5858)
+ 
+Continuous-time zero/pole/gain model.
+Model Properties
+>> figure
+pzmap(G)
+grid on
+title('Pole-Zero Map G(s)')
+>> G1 = tf([1 1], [1 3]);
+>> G2 = tf(1, [100 10 1]);
+>> sys = series(G1, G2);
+
+>> % Soal nomor 7
+>> G1 = tf([1 1], [1 3]);
+>> G2 = tf(1, [100 10 1]);
+>> sys = series(G1, G2);
+>> sys = G1 * G2;
+>> figure
+step(sys)
+grid on
+title('Step Response Series System')
+>> sys = series(G1, G2)
+
+sys =
+ 
+             s + 1
+  ----------------------------
+  100 s^3 + 310 s^2 + 31 s + 3
+ 
+Continuous-time transfer function.
+Model Properties
+>> step(sys)
+
+>> % Soal nomor 8
+>> % Definisi G1 dan G2
+>> s = tf('s');
+>> G1 = (s + 1)/(s + 3);
+>> G2 = s/(s^2 + 2*s + 5);
+>> % Hubungkan kedua sistem secara parallel
+>> G_total = G1 + G2
+
+G_total =
+ 
+  s^3 + 4 s^2 + 10 s + 5
+  -----------------------
+  s^3 + 5 s^2 + 11 s + 15
+ 
+Continuous-time transfer function.
+Model Properties
+>> % Grafik Bode
+figure
+bode(G_total)
+title('Bode Plot dari G_{total}')
+>> % Grafik Bode
+figure
+bode(G_total)
+title('Bode Plot dari Gtotal')
+>> 
