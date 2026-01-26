@@ -320,3 +320,49 @@ Posisi pole sistem:
   -0.7126 + 1.3500i
   -0.7126 - 1.3500i
 
+>> % Soal nomor 10
+>> % Definisi fungsi alih dengan gain
+
+>> s = tf('s');
+>> G1_gain = 10*(s + 4)/(s^2 + 3*s + 2);
+>> G2 = 1/(s + 1);
+>> % Sistem loop tertutup negatif
+>> G_closed_gain = feedback(G1_gain, G2)
+
+G_closed_gain =
+ 
+    10 s^2 + 50 s + 40
+  -----------------------
+  s^3 + 4 s^2 + 15 s + 42
+ 
+Continuous-time transfer function.
+Model Properties
+>> % Tampilkan fungsi alih tertutup
+G_closed_gain
+
+% Respons impuls
+figure;
+impulse(G_closed_gain);
+title('Respons Impuls Sistem dengan Gain K=10');
+
+% Plot Bode
+figure;
+bode(G_closed_gain);
+title('Bode Plot Sistem dengan Gain K=10');
+
+G_closed_gain =
+ 
+    10 s^2 + 50 s + 40
+  -----------------------
+  s^3 + 4 s^2 + 15 s + 42
+ 
+Continuous-time transfer function.
+Model Properties
+>> % Posisi pole
+poles_gain = pole(G_closed_gain);
+disp('Posisi pole sistem dengan gain:');
+disp(poles_gain);
+Posisi pole sistem dengan gain:
+  -0.3471 + 3.5475i
+  -0.3471 - 3.5475i
+  -3.3058 + 0.0000i
