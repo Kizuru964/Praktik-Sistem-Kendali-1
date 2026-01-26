@@ -172,4 +172,39 @@ sys_d =
 Sample time: 0.1 seconds
 Discrete-time state-space model.
 Model Properties
->> 
+>> % Soal nomor 10
+>> >> % Parameter sistem
+m = 1;
+c = 1;
+k = 50;
+
+% Matriks state-space
+A = [0 1;
+    -k/m -c/m];
+B = [0;
+     1/m];
+C = [1 0];
+D = 0;
+
+% Buat sistem state-space
+sys = ss(A, B, C, D);
+
+% Simulasi step response (gaya F(t) sebagai input)
+t = 0:0.01:10;
+step(sys, t);
+title('Step Response of Mass-Spring-Damper System');
+xlabel('Time (s)');
+ylabel('Displacement x(t)');
+
+% Konversi ke transfer function
+tf_sys = tf(sys)s
+Transfer Function:
+
+tf_sys =
+ 
+       1
+  ------------
+  s^2 + s + 50
+ 
+Continuous-time transfer function.
+Model Properties
